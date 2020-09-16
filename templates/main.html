@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>GAN다 박창조</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css?ver1">
+    <script>
+        var tmpDate = new Date().getTime();
+        var attn_new_src = '../static/css/result/test/png/b2a/0002_input_b.png?' + tmpDate;
+        var cycle_new_src = '../static/css/result/test/png/b2a/0002_output_a.png?' + tmpDate;
+
+        console.log("ATTN_NEW_SRC : ",attn_new_src);
+        console.log("CYCLE_NEW_SRC : ",cycle_new_src);
+
+        $("#attn_newImg").attr('src', attn_new_src);
+        $("#cycle_newImg").attr('src', cycle_new_src);
+    </script>
+</head>
+<body>
+    <div class="area1">
+        <form>
+            <h1> 입력하는 문장을 이미지로 변환해드립니다. </h1>
+            <div class="team_info">
+                <h2>GAN다 박창조</h2>
+                <h4>정보컴퓨터공학전공 201524461 박성국</h4>
+                <h4>정보컴퓨터공학전공 201724557 장수현</h4>
+                <h4>정보컴퓨터공학전공 201724480 박창조</h4>
+            </div>
+        </form>
+    </div>
+    <div class="area2">
+        <form method="POST" action="/translate">
+            <div>
+                <div style="margin: 20px;">
+                    <label for="animals">
+                        <h2 style="display: inline;">
+                            1. 생성하고자 하는 객체를 선택하세요.
+                        </h2>
+                    </label>
+                    <select name="animal" id="animals">
+                        <option value="non_choice">--선택--</option>
+                        <option value="bird">새</option>
+                        <option value="fox">여우</option>
+                        <option value="chicken">닭</option>
+                        <option value="tiger">호랑이</option>
+                    </select>
+                </div>
+                <div style="margin: 10px;">
+                    <label for="patterns">
+                        <h2 style="display: inline;">
+                            2. 변환하고자 하는 화풍을 선택하세요.
+                        </h2>
+                    </label>
+                    <select name="pattern" id="patterns">
+                        <option value="non_choice">--선택--</option>
+                        <option value="dongyang">동양화</option>
+                        <option value="waterblack">수묵화</option>
+                    </select>
+                </div>
+                <div style="margin: 10px;">
+                    <h2>3. 이미지 생성하고자 하는 문장을 입력하세요.</h2>
+                    <input class="txt_input" type="text" name="obj">
+                </div>
+                <button class="btn" type="submit">이미지 변환하기</button>
+            </div>
+
+        </form>
+        <div>
+            <p class="output_area">
+                <h4> 선택된 객체 : {{animal}}</h4>
+                <h4> 선택된 화풍 : {{pattern}}</h4>
+                <h4> 입력된 문장 : {{obj}}</h4>
+                {% if obj == None %}
+                    <div> 입력된 문장이 없습니다. </div>
+                {% elif obj == "chicken" %}
+                    <div class="img_box">
+                        <div class="img_before">
+                            <h4>before</h4>
+                            <img src="../static/css/images/chicken01_before.png" alt="input_img" width=100%;>
+                        </div>
+                        <div class="img_after">
+                            <h4>after</h4>
+                            <img src="../static/css/images/chicken01_after.png" alt="output_img" width=100%;>
+                        </div>
+                    </div>
+                {% elif obj == "bird" %}
+                    <div class="img_box">
+                        <div class="img_before">
+                            <h4>before</h4>
+                            <img src="../static/css/images/bird01_before.png" alt="input_img" width=100%;>
+                        </div>
+                        <div class="img_after">
+                            <h4>after</h4>
+                            <img src="../static/css/images/bird01_after.png" alt="output_img" width=100%;>
+                        </div>
+                    </div>
+                {% elif obj == "붉은 털을 가진 여우" %}
+                    <div class="img_box">
+                        <div class="img_before">
+                            <h4>before</h4>
+                            <img src="../static/css/images/fox01_before.png" alt="input_img" width=100%;>
+                        </div>
+                        <div class="img_after">
+                            <h4>after</h4>
+                            <img src="../static/css/images/fox01_after.png" alt="output_img" width=100%;>
+                        </div>
+                    </div>
+                {% else %}
+                   <div class="img_box">
+                        <div class="img_before">
+                            <h4>before</h4>
+                            <img id="attn_newImg" src="../static/css/result/test/png/b2a/0002_input_b.png" alt="input_img" width=100%;>
+                        </div>
+                        <div class="img_after">
+                            <h4>after</h4>
+                            <img id="cycle_newImg" src="../static/css/result/test/png/b2a/0002_output_a.png" alt="output_img" width=100%;>
+                        </div>
+                    </div>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</body>
+</html>
